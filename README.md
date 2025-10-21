@@ -1,7 +1,7 @@
 # E-Commerce-Sales-Analysis
 Olist Store is the largest department store in Brazilian marketplaces. Olist connects small businesses from all over Brazil to channels without hassle and with a single contract. The Brazilian ecommerce public dataset of orders (from 2016 to 2018) made at Olist Store is provided to your company for analysis.
 
-This repository contains SQL queries and exploratory analysis for an e-commerce dataset (Olist-style). I generated a README that explains the repository structure, the main SQL file (`ecommercesql.sql`), the queries included, and how to run them locally. Below you'll find a concise guide explaining what each query does, how to execute the queries, and suggestions for next steps.
+This repository contains SQL queries and exploratory analysis for an e-commerce dataset (Olist-style). I generated a README that explains the repository structure, the main SQL file (`ecommercesql.sql`), the queries included, and how to run them locally. Below you'll find a concise guide explaining what each query does, how to execute the queries, and suggestions for next steps. (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 
 ## Table of contents
 - Overview
@@ -22,10 +22,10 @@ This project analyzes order, payment, review, product and customer data from an 
 
 These queries are intended for exploratory analysis and to form a basis for visualizations or additional analysis in notebooks or BI tools.
 
-## Dataset (expected tables)
+## Dataset (expected tables) (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 The SQL expects a database named `ecommerce` and the following tables (names used exactly as in the SQL file):
 - `orders`
-- `olist_order_payments_dataset`
+- `olist_order_payments_dataset` 
 - `reviews`
 - `geolocation`
 - `items`

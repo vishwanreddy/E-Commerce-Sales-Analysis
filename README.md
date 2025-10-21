@@ -231,7 +231,7 @@ This dashboard aggregates order and payment data from the Olist marketplace to p
 
 ---
 
-##E‑commerce Sales Power Bi Dashboard
+## E‑commerce Sales Power Bi Dashboard :
 A reproducible sales analytics dashboard built to explore and visualize order, payment, product and review behaviour in an e‑commerce dataset. The dashboard displays key performance indicators (KPIs), geographic and temporal breakdowns, payment and review analysis, and product category metrics.
 dashboard-snapshot
 

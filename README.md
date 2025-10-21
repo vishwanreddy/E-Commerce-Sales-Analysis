@@ -9,10 +9,6 @@ This repository contains SQL queries and exploratory analysis for an e-commerce 
 - Files
 - Queries included (what each does)
 - How to run (local MySQL / MariaDB)
-- Notes & tips
-- Contributing
-- License
-- Author / Contact
 
 ## Overview
 This project analyzes order, payment, review, product and customer data from an e-commerce dataset using SQL. The provided SQL file contains queries to compute insights such as:
@@ -234,3 +230,98 @@ This dashboard aggregates order and payment data from the Olist marketplace to p
 4. Add interactive filters and test performance on sample vs full data.
 
 ---
+
+##E‑commerce Sales Power Bi Dashboard
+A reproducible sales analytics dashboard built to explore and visualize order, payment, product and review behaviour in an e‑commerce dataset. The dashboard displays key performance indicators (KPIs), geographic and temporal breakdowns, payment and review analysis, and product category metrics.
+dashboard-snapshot
+
+## shows sample KPI tiles and visual components such as:
+
+Total Sales: 16.01M
+Total Profit: 2.42M
+Total Unique Customers: 96.10K
+Total Sellers: 3,094
+Visuals comparing payment_value by Weekday/Weekend, payment_type counts by review_score, average delivery days by product category, city-level averages, and average review_score vs days.
+Table of contents
+
+##Project overview
+Data source & schema
+Visualizations (what they show & how they were computed)
+Quick start (how to run / reproduce)
+Data processing summary
+Key insights shown in the dashboard
+Future improvements
+License & contact
+Project overview
+This project provides an interactive dashboard to analyze historical e‑commerce orders. Typical uses:
+
+Monitor business KPIs (sales, profit, active customers, number of sellers).
+Compare payment methods and review patterns.
+Measure delivery performance across product categories and geolocations.
+Aid decision-making for operations, marketing and product placement.
+The repository contains data preparation notebooks/scripts and dashboard code (Jupyter Notebook, Streamlit, Dash or Power BI files depending on implementation).
+
+##Data source & schema
+The dashboard expects an orders dataset with at least the following fields (column names used in the visuals):
+
+order_id (unique order identifier)
+order_purchase_timestamp / order_approved_at / order_delivered_timestamp (timestamps for calculating delivery days)
+customer_id
+seller_id
+payment_type (e.g., credit_card, boleto, voucher, debit_card)
+payment_value (monetary value for the order)
+price (product-level price if available)
+product_category_name
+geolocation_city (city associated with the order)
+review_score (integer score, typically 1–5)
+If your dataset uses different column names, adapt the ingestion and mapping step in the preprocessing script.
+
+##Visualizations & metrics explained
+KPI tiles
+
+Total Sales: Sum(payment_value)
+Total Profit: Sum(profit) or computed as Sum(payment_value) - Sum(cost) if cost data exists
+Total Unique Customers: Count distinct customer_id
+Total Sellers: Count distinct seller_id
+Sum of payment_value by Weekday/Weekend (pie chart)
+
+Aggregates payment_value split by whether the purchase occurred on a weekday or weekend.
+Count of order_id by payment_type and review_score (bar chart)
+
+Counts orders per payment_type filtered by a chosen review_score (example shows review_score = 5).
+Average of Days by product_category_name (donut / ring chart)
+
+Average number of days between purchase and delivery grouped by product_category_name.
+Average payment_value and average price by geolocation_city (grouped bar chart)
+
+Compares average order payment and average product price in each city (example: Sao Paulo).
+Average of Days and Average of review_score (dual bar chart)
+
+Compares average delivery days to average review_score (shows relationship between delivery performance and ratings).
+Data processing summary
+Common preprocessing steps included in scripts/notebooks:
+
+Timestamp parsing and timezone normalization
+Join orders, payments, products, reviews and geolocation tables
+Compute derived fields:
+delivery_days = date(order_delivered_timestamp) - date(order_purchase_timestamp)
+weekday/weekend flag from order_purchase_timestamp
+profit (if cost and price available)
+Handle missing values and outliers:
+Filter unrealistic delivery_days (negative values)
+Fill or remove null review_score depending on analysis needs
+Aggregate data as required for each visualization and write aggregated tables to Parquet for fast dashboard loading
+Key insights
+Weekday purchases contribute most of the total payment_value compared to weekend purchases.
+credit_card is the dominant payment_type among orders with review_score = 5 (≈4.2K orders), followed by boleto (≈1K).
+Average delivery days differ between categories — example shows two categories (electronics and pet_shop) with different averages (electronics ≈12.45 days; pet_shop ≈10.91 days).
+Geolocation example: Sao Paolo shows higher average payment_value (≈134) and average price (≈107) compared to other cities.
+The relationship between delivery days and review score suggests longer delivery times are associated with lower review scores (requires correlation analysis for confirmation).
+Use these as starting points for further investigation (e.g., retention by payment_type, seller performance, promotion impact).
+
+##Suggested analyses & future improvements
+Add time series (monthly/weekly) trend charts for sales, profit and order volume.
+Drill-down filters (region → city → seller) for more granular analysis.
+Add cohort analysis and customer lifetime metrics.
+Add statistical correlation and regression panels to quantify impact of delivery_days on review_score.
+Add alerts for KPIs when thresholds are crossed (for real‑time monitoring).

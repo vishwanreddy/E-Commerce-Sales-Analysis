@@ -244,16 +244,15 @@ Total Sellers: 3,094
 Visuals comparing payment_value by Weekday/Weekend, payment_type counts by review_score, average delivery days by product category, city-level averages, and average review_score vs days.
 Table of contents
 
-##Project overview
+## Project overview
 Data source & schema
 Visualizations (what they show & how they were computed)
 Quick start (how to run / reproduce)
 Data processing summary
 Key insights shown in the dashboard
 Future improvements
-License & contact
 Project overview
-This project provides an interactive dashboard to analyze historical e‑commerce orders. Typical uses:
+## This project provides an interactive dashboard to analyze historical e‑commerce orders. Typical uses:
 
 Monitor business KPIs (sales, profit, active customers, number of sellers).
 Compare payment methods and review patterns.
@@ -261,7 +260,7 @@ Measure delivery performance across product categories and geolocations.
 Aid decision-making for operations, marketing and product placement.
 The repository contains data preparation notebooks/scripts and dashboard code (Jupyter Notebook, Streamlit, Dash or Power BI files depending on implementation).
 
-##Data source & schema
+## Data source & schema
 The dashboard expects an orders dataset with at least the following fields (column names used in the visuals):
 
 order_id (unique order identifier)
@@ -276,7 +275,7 @@ geolocation_city (city associated with the order)
 review_score (integer score, typically 1–5)
 If your dataset uses different column names, adapt the ingestion and mapping step in the preprocessing script.
 
-##Visualizations & metrics explained
+## Visualizations & metrics explained
 KPI tiles
 
 Total Sales: Sum(payment_value)
@@ -319,7 +318,7 @@ Geolocation example: Sao Paolo shows higher average payment_value (≈134) and a
 The relationship between delivery days and review score suggests longer delivery times are associated with lower review scores (requires correlation analysis for confirmation).
 Use these as starting points for further investigation (e.g., retention by payment_type, seller performance, promotion impact).
 
-##Suggested analyses & future improvements
+## Suggested analyses & future improvements
 Add time series (monthly/weekly) trend charts for sales, profit and order volume.
 Drill-down filters (region → city → seller) for more granular analysis.
 Add cohort analysis and customer lifetime metrics.

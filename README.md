@@ -156,12 +156,105 @@ Repository owner: vishwanreddy
 
 ---
 
-What I did: I created this README to document the SQL analytics in `ecommercesql.sql`, explain each query, and give instructions to run and extend the analysis. What's next: if you'd like, I can (pick one):
-- Add a CONTRIBUTING.md and LICENSE file,
-- Convert these queries into views or stored procedures,
-- Create a Jupyter notebook that runs these queries and visualizes results,
-- Or update the SQL to handle NULLs and timezone-normalized timestamps.
 
-Tell me which next step you'd prefer and I will generate the file(s) or SQL changes accordingly.
+# Olist Store Analysis Dashboard
 
+A concise, actionable README for the Tableau dashboard "Olist Store Analysis" — built to summarize marketplace performance, surface trends, and guide decisions for merchants, operations and data teams.
 
+---
+
+## Overview
+This dashboard aggregates order and payment data from the Olist marketplace to present high-level KPIs, temporal trends, and customer / product behavior. It helps stakeholders quickly answer questions like:
+- How many customers, sellers and unique products are active?
+- What are total sales and profit?
+- Which payment methods and purchase days dominate?
+- How do review scores relate to shipping time?
+
+---
+
+## Key Metrics (Quick glance)
+- Total Customers: 96,096  
+- Total Sales (Payment Value): 16,008,872  
+- Total Profit: 2,417,228  
+- Total Unique Products: 73  
+- Total Sellers: 3,095
+
+---
+
+## Visuals & What They Show
+- KPI Tiles: Top-of-dashboard summary for Customers, Sales, Profit, Unique Products, Sellers.
+- Weekday vs Weekend Pie: Weekday orders = 77.2% (12,367,988), Weekend orders = 22.8% (3,640,884).  
+  - Interpretation: Most purchases occur on weekdays; weekend campaigns could target a smaller but valuable segment.
+- Payment Type (bar chart): Counts by payment method:
+  - credit_card: 76,313
+  - boleto: 19,762
+  - voucher: 3,856
+  - debit_card / not_defined / Null: minor counts
+  - Interpretation: Credit cards dominate, so optimizing card payment flows and fraud checks yields high ROI.
+- Avg. Price vs Avg. Payment Value (city-level example: São Paulo)
+  - Avg. Price ~ 107.53, Avg. Payment Value ~ 135.83 (indicating discounts, shipping add-ons, or multi-item purchases)
+- Review Score vs Avg. Shipping Days (vertical bars):
+  - review_score 1 → avg_shipping_days 21
+  - Null → 19
+  - 2 → 17
+  - 3 → 14
+  - 4 → 12
+  - 5 → 11
+  - Interpretation: Higher review scores correlate with lower shipping times — shipping reliability impacts satisfaction.
+- Order Purchase Timestamp (annual payment value):
+  - 2018 → 8,699,763
+  - 2017 → 7,249,747
+  - 2016 → 59,362
+  - Interpretation: Strong growth year-over-year across available years.
+- Product Category Highlights (arrow markers show counts/importance):
+  - fashion_calcados: 16
+  - pcs: 14
+  - pet_shop: 11
+  - Interpretation: Footwear and general-purpose products are among top categories by metric shown.
+
+---
+
+## Data Sources
+- Primary: Olist transaction/order dataset (orders, payments, order_items, sellers, customers, reviews)
+- Key fields used: order_purchase_timestamp, payment_value, payment_type, customer_city, product_category_name, seller_id, order_id, review_score, shipping_days
+
+---
+
+## Methodology & Calculations
+- Total Sales: sum(payment_value) by filters applied
+- Total Profit: revenue - cost (as available or approximate/proxy from dataset)
+- Avg. Price: average unit price per order or per product, depending on dataset join
+- Shipping days: calculated from order_purchase_timestamp → order_delivered_carrier_date / order_delivered_customer_date (difference)
+- Review-score grouping: group NULL and numeric values, plot avg shipping days per group
+
+---
+
+## Dashboard Interactions & Filters
+- Filters available on right pane: Year of Order Purchase, review_score slider, Payment Type (multi-select), Customer City (scroll list)
+- Interactive features: Hover tooltips on bars/pie, clickable legends to isolate categories, top KPI tiles update with applied filters
+
+---
+
+## Key Insights & Recommendations
+- Prioritize improvements in shipping operations — largest impact on review scores and customer satisfaction.
+- Focus conversion and UX tests on credit-card flow; it's the largest payment channel.
+- Target weekday marketing for scale; consider weekend promotions to increase share on lower-traffic days.
+- Promote top product categories (fashion_calcados, pcs, pet_shop) and analyze margin contribution per category.
+- Investigate 2016 vs later years to validate data completeness; apparent low value in 2016 suggests partial data or low adoption.
+
+---
+
+## Suggested Next Steps
+- Add profitability by category and seller-level margins to identify high-value segments.
+- Build cohort analysis to measure retention and repeat purchase behavior.
+- Add map / geospatial visual to analyze city-level concentration and logistics hubs.
+- Integrate shipping SLA KPIs and vendor-level performance dashboards.
+- Expose CSV/SQL query or API endpoint to reproduce the charts programmatically.
+
+## Reproducing the Key Charts
+1. Data cleaning: dedupe orders, join payments/order_items/products/reviews, compute shipping_days.
+2. Aggregate KPIs at chosen grain (order-level for most metrics).
+3. Build visuals (Tableau or viz library): KPI tiles, pie for weekday/weekend, bar charts for payment types and yearly totals, line/bar for avg shipping days by review score.
+4. Add interactive filters and test performance on sample vs full data.
+
+---

@@ -127,29 +127,6 @@ WHERE
 
 The result will be a single number column `total_count`.
 
-## Notes & tips
-- Date/time functions and weekday indices might differ across DBMS. Verify `WEEKDAY()` behavior and adjust if necessary (some systems use 0–6 mapping where 0 is Monday).
-- The dataset naming is Olist-like; if you imported Olist CSVs, ensure encoding and NULL handling are consistent.
-- Consider indexing `order_id` columns across tables for faster joins.
-- When moving to production analysis or dashboards, convert these queries into parameterized views or materialized tables for performance.
-
-## Next steps / suggested enhancements
-- Add visualization notebooks (Jupyter / R Markdown) that connect to the database and produce charts (sales over time, payment type mix, delivery-day distribution).
-- Add data-cleaning queries to handle missing delivery dates and inconsistent timestamps.
-- Create reproducible ETL scripts to load raw CSVs into the `ecommerce` schema.
-- Add unit tests or query validation steps to ensure results are stable as data changes.
-
-## Contributing
-Contributions are welcome. Suggested workflow:
-- Fork the repo
-- Create a feature branch
-- Add SQL improvements, documentation, or notebooks
-- Open a pull request describing changes
-
-Please add clear descriptions for any new queries and include expected output examples.
-
-## License
-This repository does not specify a license. If you want this repository to be open-source, add a LICENSE file (for example MIT or Apache 2.0).
 
 ## Author / Contact
 Repository owner: vishwanreddy
